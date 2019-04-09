@@ -290,6 +290,13 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
 								result.noopener.add(new String[]{noopener.child(0).attr("alt"),noopener.attr("abs:href")});
 							}
 						}
+						Elements external=element.getElementsByClass("external");
+						for(int e=0;e<external.size();e++){
+							Elements links=external.get(e).getElementsByTag("a");
+							for(int a=0;a<links.size();a++){
+								result.noopener.add(new String[]{links.get(a).text(),links.get(a).attr("abs:href")});
+							}
+						}
 						Elements site=element.getElementsByClass("to-link-icon");
 						if(site.size()>0){
 							result.siteName=site.attr("alt");
