@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item
+		android:id="@+id/colorSearch"
+		android:title="@string/colorSearch"/>
+	<item
+		android:id="@+id/bovwSearch"
+		android:title="@string/bovwSearch"/>
+</menu>

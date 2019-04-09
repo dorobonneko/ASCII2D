@@ -1,11 +1,45 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:id="@+id/content">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+	<Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="?android:attr/actionBarSize"
+		android:id="@+id/toolbar"
+		android:elevation="5dp"
+		android:translationZ="0dp"
+		android:background="?android:attr/windowBackground"/>
 
-</LinearLayout>
+	<ListView
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_below="@id/toolbar"
+		android:id="@+id/listview"/>
+
+	<ImageButton
+		android:id="@+id/add"
+		android:layout_marginBottom="32dp"
+		android:layout_marginEnd="32dp"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentEnd="true"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:src="@drawable/plus"
+		android:tint="?android:attr/colorControlNormal"
+		android:background="@drawable/ripple_circle"
+		android:scaleType="centerInside"
+		android:elevation="3dp"
+		android:translationZ="3dp"/>
+
+	<ProgressBar
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:id="@+id/progressBar"
+		android:visibility="gone"
+		android:layout_centerInParent="true"/>
+
+</RelativeLayout>
+

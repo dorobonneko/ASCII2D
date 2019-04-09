@@ -2,6 +2,12 @@
 <resources>
 
     <string name="app_name">ASCII2D</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="scaleImage">缩小尺寸</string>
+	<string name="chooserImage">选择图片</string>
+	<string name="colorSearch">色相搜索</string>
+	<string name="bovwSearch">特征搜索</string>
+	<string name="loadFail">加载失败</string>
+	<string name="history">最近搜索</string>
+	<string name="hot">24小时热门</string>
+	<string name="open_in_browser">浏览器打开</string>
 </resources>
