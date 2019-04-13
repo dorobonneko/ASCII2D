@@ -10,4 +10,6 @@
 	<string name="history">最近搜索</string>
 	<string name="hot">24小时热门</string>
 	<string name="open_in_browser">浏览器打开</string>
+	<string name="search_url">检索URL</string>
+	<string name="search">检索</string>
 </resources>

@@ -35,16 +35,20 @@ import android.net.Uri;
 import com.moe.ascii2d.utils.Path;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.text.InputType;
+import com.moe.ascii2d.net.QueryHashByUrl;
+import com.moe.ascii2d.net.Query;
 
-public class MainActivity extends Activity implements View.OnClickListener,QueryHash.OnHashReceivedListener,View.OnApplyWindowInsetsListener
+public class MainActivity extends Activity implements View.OnClickListener,QueryHash.OnHashReceivedListener,View.OnApplyWindowInsetsListener,View.OnLongClickListener
 {
-	private Dialog addDialog;
+	private Dialog addDialog,urlDialog;
 	private String path;
 	//private ParcelFileDescriptor mParcelFileDescriptor;
 	private BitmapRegionDecoder mBitmapRegionDecoder;
 	private BitmapFactory.Options options;
 	private String mode;
-	private QueryHash mQueryId;
+	private Query mQueryId;
 	private View progressBar,add;
 	private ActionBar mActionBar;
 	private ListView listview;
@@ -60,6 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
         setContentView(R.layout.main);
 		add = findViewById(R.id.add);
 		add.setOnClickListener(this);
+		add.setOnLongClickListener(this);
 		progressBar = findViewById(R.id.progressBar);
 		setActionBar((Toolbar)findViewById(R.id.toolbar));
 		mActionBar = getActionBar();
@@ -216,6 +221,16 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
 		mQueryId.exec(this);
 	}
 
+	private void query(String url)
+	{
+		progressBar.setVisibility(View.VISIBLE);
+		add.setEnabled(false);
+		if (mQueryId != null)
+			mQueryId.cancel();
+			mQueryId = new QueryHashByUrl(url);
+		mQueryId.exec(this);
+	}
+	
 	@Override
 	public void onHashReceived(final String id)
 	{
@@ -341,5 +356,37 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
 			}
 		}.start();
 	}
+
+	@Override
+	public boolean onLongClick(View p1)
+	{
+		if(urlDialog==null){
+			final EditText search=new EditText(this);
+			search.setSingleLine(true);
+			search.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+			search.setId(android.R.id.input);
+			urlDialog = new AlertDialog.Builder(this).setTitle(R.string.search_url).setView(search).setNegativeButton(R.string.colorSearch, new DialogInterface.OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface p1, int p2)
+					{
+						mode = "color";
+						query(search.getText().toString().trim());
+					}
+				}).setPositiveButton(R.string.bovwSearch, new DialogInterface.OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface p1, int p2)
+					{
+						mode = "bovw";
+						query(search.getText().toString().trim());
+					}
+				}).setNeutralButton(android.R.string.cancel, null).create();
+		}
+		urlDialog.show();
+		((EditText)urlDialog.findViewById(android.R.id.input)).setText(null);
+		return true;
+	}
+
 
 }

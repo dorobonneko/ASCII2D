@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.File;
 
-public class QueryHash
+public class QueryHash implements Query
 {
 	private OnHashReceivedListener mOnHashReceivedListener;
 	private Bitmap bitmap;
@@ -123,8 +123,5 @@ public class QueryHash
 		{}
 		if (huc != null)huc.disconnect();
 	}
-	public interface OnHashReceivedListener
-	{
-		void onHashReceived(String hash);
-	}
+	
 }
