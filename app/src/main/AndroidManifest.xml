@@ -27,6 +27,22 @@
 					<data android:host="ascii2d.net"/>
 					<data android:pathPattern="/search/.*"/>
 			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="*"/>
+				<data android:mimeType="image/*"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.intent.action.SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:mimeType="image/*"/>
+			</intent-filter>
 		</activity>
 	</application>
 </manifest>

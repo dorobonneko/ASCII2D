@@ -88,7 +88,12 @@ public class Path
 		}
 		// MediaStore (and general)
 		else if ("content".equalsIgnoreCase(uri.getScheme())) {
+			try{
 			return getDataColumn(context, uri, null, null);
+			}catch(Exception e){
+				String path=uri.getPath();
+				return new File(Environment.getExternalStorageDirectory(),path.substring(path.indexOf("/",1))).getAbsolutePath();
+			}
 		}
 		// File
 		else if ("file".equalsIgnoreCase(uri.getScheme())) {

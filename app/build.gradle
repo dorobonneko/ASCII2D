@@ -20,6 +20,6 @@ android {
 }
 
 dependencies {
-	compile 'com.github.bumptech.glide:glide:4.8.+'
+	//compile 'com.github.bumptech.glide:glide:4.8.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

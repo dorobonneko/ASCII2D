@@ -3,7 +3,6 @@ import android.view.*;
 import android.widget.*;
 
 import android.text.Html;
-import com.bumptech.glide.Glide;
 import com.moe.ascii2d.R;
 import com.moe.ascii2d.empty.ResultElement;
 import java.util.List;
@@ -11,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import com.moe.ascii2d.MainActivity;
 import com.moe.ascii2d.Ascii2D;
+import com.moe.tinyimage.TinyImage;
 
 public class ResultAdapter extends BaseAdapter
 {
@@ -47,7 +47,7 @@ public class ResultAdapter extends BaseAdapter
 		if(vh==null)
 			p2.setTag(vh=new ViewHolder(p2));
 		vh.position=p1;
-		Glide.with(p2.getContext()).load(result.previewUrl).into(vh.preview);
+		TinyImage.get(p2.getContext()).load(result.previewUrl,vh.preview).commit();
 		vh.summary.setText(Html.fromHtml(String.format("%1$s %2$s %3$s <font color=\"red\">%4$s</font> %5$s",result.pixel,result.format,result.size,result.siteName==null?"":result.siteName,result.title==null?"":result.title)));
 		vh.title.setText(result.hash);
 		return p2;

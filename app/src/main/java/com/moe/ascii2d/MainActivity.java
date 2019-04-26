@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
 	//private ParcelFileDescriptor mParcelFileDescriptor;
 	private BitmapRegionDecoder mBitmapRegionDecoder;
 	private BitmapFactory.Options options;
-	private String mode;
+	private String mode="color";
 	private Query mQueryId;
 	private View progressBar,add;
 	private ActionBar mActionBar;
@@ -77,10 +77,37 @@ public class MainActivity extends Activity implements View.OnClickListener,Query
 		content.setOnApplyWindowInsetsListener(this);
 		if (Intent.ACTION_VIEW.equals(getIntent().getAction()))
 		{
-			add.setVisibility(View.INVISIBLE);
-			progressBar.setVisibility(View.VISIBLE);
-			mActionBar.setSubtitle(getIntent().getData().getLastPathSegment());
-			loadPage(getIntent().getDataString());
+			Uri uri=getIntent().getData();
+			switch(uri.getScheme()){
+				case "http":
+				case "https":
+					add.setVisibility(View.INVISIBLE);
+					progressBar.setVisibility(View.VISIBLE);
+					mActionBar.setSubtitle(getIntent().getData().getLastPathSegment());
+					loadPage(getIntent().getDataString());
+					break;
+				case "file":
+				case "content":
+					onActivityResult(322,RESULT_OK,getIntent());
+					break;
+			}
+			//progressBar.setVisibility(View.VISIBLE);
+			
+			
+		}else if(Intent.ACTION_SEARCH.equals(getIntent().getAction())){
+			//progressBar.setVisibility(View.VISIBLE);
+			Uri uri=getIntent().getData();
+			switch(uri.getScheme()){
+				case "http":
+				case "https":
+					add.setVisibility(View.INVISIBLE);
+					query(getIntent().getDataString());
+					break;
+				case "file":
+				case "content":
+					onActivityResult(322,RESULT_OK,getIntent());
+					break;
+			}
 			
 		}
     }
