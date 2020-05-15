@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import com.moe.ascii2d.MainActivity;
 import com.moe.ascii2d.Ascii2D;
-import com.moe.tinyimage.TinyImage;
+import com.moe.pussy.Pussy;
 
 public class ResultAdapter extends BaseAdapter
 {
@@ -47,7 +47,7 @@ public class ResultAdapter extends BaseAdapter
 		if(vh==null)
 			p2.setTag(vh=new ViewHolder(p2));
 		vh.position=p1;
-		TinyImage.get(p2.getContext()).load(result.previewUrl,vh.preview).commit();
+		Pussy.$(p2.getContext()).load(result.previewUrl).execute().into(vh.preview);
 		vh.summary.setText(Html.fromHtml(String.format("%1$s %2$s %3$s <font color=\"red\">%4$s</font> %5$s",result.pixel,result.format,result.size,result.siteName==null?"":result.siteName,result.title==null?"":result.title)));
 		vh.title.setText(result.hash);
 		return p2;
